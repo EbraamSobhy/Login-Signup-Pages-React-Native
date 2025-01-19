@@ -1,8 +1,28 @@
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 export default function LoginScreen() {
+
+    const navigation = useNavigation();
+
+    const handleRegister = () => {
+        navigation.navigate("Signup");
+    };
+
+    // Firebase
+        const handleSignIn = async () => {
+            try {
+            const userCredential = await auth().signInWithEmailAndPassword(email, password);
+            console.log('User signed in:', userCredential.user);
+            } catch (error) {
+            console.error('Error signing in:', error);
+            }
+        };
+
+
     return (
         <View style={styles.container}>
             <View>
@@ -15,11 +35,19 @@ export default function LoginScreen() {
                 <Text style={styles.signinText}>Sign in to your account</Text>
             </View>
             <View style={styles.inputContainer}>
-                <FontAwesome name="user" size={30} style={styles.inputIcon} />
+                <FontAwesome
+                    name="user"
+                    size={30}
+                    style={styles.inputIcon}
+                />
                 <TextInput style={styles.textInput} placeholder="Email" />
             </View>
             <View style={styles.inputContainer}>
-                <FontAwesome name="lock" size={30} style={styles.inputIcon} />
+                <FontAwesome
+                    name="lock"
+                    size={30}
+                    style={styles.inputIcon}
+                />
                 <TextInput style={styles.textInput} placeholder="Password" secureTextEntry />
             </View>
             <Text style={styles.forgetpassword}>Forget your password?</Text>
@@ -27,13 +55,18 @@ export default function LoginScreen() {
                 <Text style={styles.signin}>Sign in</Text>
                 <View style={[styles.linearGradient, { backgroundColor: "#623AA2"}]}
                 >
-                    <AntDesign name="arrowright"
+                    <AntDesign
+                        name="arrowright"
                         size={30}
                         color="white"
                     />
                 </View>
             </View>
-            <Text style={styles.footerText}>Don't have an account? <Text style={{textDecorationLine: "underline"}}>Create</Text></Text>
+            <TouchableOpacity onPress={handleRegister}>
+                <Text style={styles.footerText}>
+                    Don't have an account? <Text style={{textDecorationLine: "underline"}}>Create</Text>
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 }
