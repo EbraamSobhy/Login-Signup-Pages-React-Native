@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
@@ -12,61 +12,62 @@ export default function LoginScreen() {
     };
 
     // Firebase
-        const handleSignIn = async () => {
-            try {
+    const handleSignIn = async () => {
+        try {
             const userCredential = await auth().signInWithEmailAndPassword(email, password);
             console.log('User signed in:', userCredential.user);
-            } catch (error) {
+        } catch (error) {
             console.error('Error signing in:', error);
-            }
-        };
-
+        }
+    };
 
     return (
-        <View style={styles.container}>
-            <View>
-                <Image source={require("../assets/topVector.png")} style={styles.topImage} />
-            </View>
-            <View>
-                <Text style={styles.helloText}>Hello</Text>
-            </View>
-            <View>
-                <Text style={styles.signinText}>Sign in to your account</Text>
-            </View>
-            <View style={styles.inputContainer}>
-                <FontAwesome
-                    name="user"
-                    size={30}
-                    style={styles.inputIcon}
-                />
-                <TextInput style={styles.textInput} placeholder="Email" />
-            </View>
-            <View style={styles.inputContainer}>
-                <FontAwesome
-                    name="lock"
-                    size={30}
-                    style={styles.inputIcon}
-                />
-                <TextInput style={styles.textInput} placeholder="Password" secureTextEntry />
-            </View>
-            <Text style={styles.forgetpassword}>Forget your password?</Text>
-            <View style={styles.signInButtonContainer}>
-                <Text style={styles.signin}>Sign in</Text>
-                <View style={[styles.linearGradient, { backgroundColor: "#623AA2"}]}
-                >
-                    <AntDesign
-                        name="arrowright"
-                        size={30}
-                        color="white"
-                    />
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={styles.container}>
+                <View>
+                    <Image source={require("../assets/topVector.png")} style={styles.topImage} />
                 </View>
+                <View>
+                    <Text style={styles.helloText}>Hello</Text>
+                </View>
+                <View>
+                    <Text style={styles.signinText}>Sign in to your account</Text>
+                </View>
+                <View style={styles.inputContainer}>
+                    <FontAwesome
+                        name="user"
+                        size={30}
+                        style={styles.inputIcon}
+                    />
+                    <TextInput style={styles.textInput} placeholder="Email" />
+                </View>
+                <View style={styles.inputContainer}>
+                    <FontAwesome
+                        name="lock"
+                        size={30}
+                        style={styles.inputIcon}
+                    />
+                    <TextInput style={styles.textInput} placeholder="Password" secureTextEntry />
+                </View>
+                <Text style={styles.forgetpassword}>Forget your password?</Text>
+                <View style={styles.signInButtonContainer}>
+                    <Text style={styles.signin}>Sign in</Text>
+                    <View style={[styles.linearGradient, { backgroundColor: "#623AA2" }]}
+                    >
+                        <AntDesign
+                            name="arrowright"
+                            size={30}
+                            color="white"
+                        />
+                    </View>
+                </View>
+                <TouchableOpacity onPress={handleRegister}>
+                    <Text style={styles.footerText}>
+                        Don't have an account? <Text style={{ textDecorationLine: "underline" }}>Create Account</Text>
+                    </Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={handleRegister}>
-                <Text style={styles.footerText}>
-                    Don't have an account? <Text style={{textDecorationLine: "underline"}}>Create Account</Text>
-                </Text>
-            </TouchableOpacity>
-        </View>
+        </ScrollView>
     );
 }
 
