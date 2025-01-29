@@ -3,7 +3,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
 
 export default function SignUpScreen() {
 

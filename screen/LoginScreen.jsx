@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'reac
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
 
 export default function LoginScreen() {
 
@@ -64,7 +63,7 @@ export default function LoginScreen() {
             </View>
             <TouchableOpacity onPress={handleRegister}>
                 <Text style={styles.footerText}>
-                    Don't have an account? <Text style={{textDecorationLine: "underline"}}>Create</Text>
+                    Don't have an account? <Text style={{textDecorationLine: "underline"}}>Create Account</Text>
                 </Text>
             </TouchableOpacity>
         </View>
